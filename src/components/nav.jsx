@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-const Nav = () => {
+const Nav = ({ handleSearchSubmit, setSearchQuery }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isSearchOpen, setSearchOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
   const handleHamburgerClick = () => {
     setMenuOpen(!isMenuOpen);
@@ -12,9 +13,24 @@ const Nav = () => {
     setSearchOpen(!isSearchOpen);
   };
 
+  const handleSearchSubmitClick = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
+
+    setSearchQuery(searchInput);
+    handleSearchSubmit();
+  };
+
+  const handleInputChange = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  console.log(searchInput);
+
   return (
     <nav className="flex justify-between w-full px-16 py-3 fixed z-[1] text-white">
-      {/* Logo and Navigation Links */}
+      {/* Your existing navigation content */}
       <div className="flex">
         <div className="w-8 py-2 border-4 border-red-500"></div>
         <a href="#" className="font-semibold">
@@ -32,7 +48,7 @@ const Nav = () => {
 
       {/* Search and Hamburger Icon */}
       <div className="flex gap-8">
-        <a href="#">
+        <a href="#" onClick={handleSearchClick}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -40,7 +56,6 @@ const Nav = () => {
             strokeWidth={1.5}
             stroke="currentColor"
             className="w-6 h-6"
-            onClick={handleSearchClick}
           >
             <path
               strokeLinecap="round"
@@ -126,14 +141,14 @@ const Nav = () => {
           </div>
         </div>
       </div>
-      {/* Search content */}
 
+      {/* Search content */}
       <div
         className={`flex gap-6 absolute  left-0 w-full bg-black px-20 py-4 transition-transform transform origin-top-right z-[2] ${
           isSearchOpen ? "" : "hidden"
         }`}
       >
-        <a href="#">
+        <a href="#" onClick={handleSearchClick}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -141,7 +156,6 @@ const Nav = () => {
             strokeWidth={1.5}
             stroke="currentColor"
             className="w-6 h-6"
-            onClick={handleSearchClick}
           >
             <path
               strokeLinecap="round"
@@ -152,10 +166,14 @@ const Nav = () => {
         </a>
         <input
           type="text"
+          value={searchInput}
+          onChange={handleInputChange}
           className="focus:outline-none focus:border-b  bg-transparent text-white"
         />
+        <button onSubmit={(e) => handleSearchSubmitClick(e)}>Search</button>
       </div>
     </nav>
   );
 };
+
 export default Nav;
