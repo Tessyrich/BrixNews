@@ -13,7 +13,7 @@ const Sectionmain = () => {
   const [searchNews, setSearchNews] = useState([]);
   const [page, setPage] = useState(1);
   const [isSearchLoading, setIsSearchLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("bitcoin");
+  const [searchQuery, setSearchQuery] = useState("");
   const [activeLiCategory, setActiveLiCategory] = useState(null);
   const [activeLiCountry, setActiveLiCountry] = useState(null);
 
@@ -153,7 +153,7 @@ const Sectionmain = () => {
       </div>
       {/* country */}
       <div
-        className="flex justify-center w-full px-20 py-6"
+        className="flex justify-center w-full lg:px-20 py-6 px-6"
         value={country}
         onClick={handleCountryChange}
       >
@@ -207,7 +207,7 @@ const Sectionmain = () => {
 
       {/* category */}
       <div
-        className="flex justify-center w-full px-20 py-6"
+        className="flex justify-center w-full lg:px-20 py-6 px-6 overflow-hidden"
         value={category}
         onClick={handleCategoryChange}
       >
@@ -295,7 +295,7 @@ const Sectionmain = () => {
       {/* Where news update is */}
 
       <div className="w-full flex">
-        <div className="w-full grid grid-col">
+        <div className="w-full grid lg:grid-cols-2 grid-col px-8">
           {isLoading ? (
             <div className="flex justify-center items-center h-screen">
               <InfinitySpin color="#dc2626" width={100} />
@@ -303,13 +303,13 @@ const Sectionmain = () => {
           ) : (
             // Your news.map logic here
             news.map((article, index) => (
-              <div key={index} className="w-full px-10 py-6">
+              <div key={index} className="w-full px-4 py-6">
                 <div
                   className="rounded-b-3xl h-lvh w-full overflow-hidden hover:transition-all dark:hover:transition-all shadow-lg"
                   style={{ height: "600px" }}
                 >
                   <img
-                    className="w-full h-2/3 "
+                    className="w-full h-44 lg:h-64 "
                     src={article.urlToImage ? article.urlToImage : Bgimage}
                     alt={article.title}
                     onError={(e) => {
@@ -339,7 +339,7 @@ const Sectionmain = () => {
             ))
           )}
         </div>
-        <div className="w-1/3 px-3">
+        <div className="w-1/3 px-3 hidden lg:flex">
           <div className="">
             <form onSubmit={handleSearchSubmit} className="">
               <div className="w-full border dark:border-gray-700 dark:bg-gray-800 flex justify-between p-2 items-center rounded-xl ">
@@ -351,7 +351,7 @@ const Sectionmain = () => {
                   dark:bg-gray-800 focus:outline-none rounded-xl text-red-600"
                   value={searchQuery}
                   placeholder="Search News article..."
-                  onClick={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 {/* <button>search</button> */}
               </div>
@@ -369,7 +369,7 @@ const Sectionmain = () => {
                       className="rounded-b-3xl w-full  hover:transition-all dark:hover:transition-all shadow-lg"
                     >
                       <img
-                        className="w-full h-36 object-cover rounded-t-lg"
+                        className="w-full h-36 object-cover rounded-t-lg mt-4"
                         src={article.urlToImage ? article.urlToImage : Bgimage}
                         alt={article.title}
                         onError={(e) => {
@@ -388,6 +388,22 @@ const Sectionmain = () => {
             )}
           </div>
         </div>
+      </div>
+      <div className="w-full flex justify-center mb-5 gap-6">
+        <button
+          className="text-red-600 dark:bg-red-800 bg-red-100 py-2 px-3 "
+          onClick={() => handlePageChange(page - 1)}
+          disabled={page === 1}
+        >
+          Previous page
+        </button>
+        <button
+          className="text-red-600 dark:bg-red-800 bg-red-100 py-2 px-3"
+          onClick={() => handlePageChange(page + 1)}
+          disabled={page === 1}
+        >
+          Next page
+        </button>
       </div>
     </div>
   );

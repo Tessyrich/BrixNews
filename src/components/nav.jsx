@@ -8,10 +8,6 @@ const Nav = () => {
     setMenuOpen(!isMenuOpen);
   };
 
-  const handleSearchClick = () => {
-    setSearchOpen(!isSearchOpen);
-  };
-
   return (
     <nav className="flex justify-between w-full px-16 py-3 fixed z-[1] text-white">
       {/* Logo and Navigation Links */}
@@ -21,10 +17,10 @@ const Nav = () => {
           LUX <span className="font-thin">News</span>{" "}
         </a>
         <ul className="flex gap-8 ml-10">
-          <li>
+          <li className="hidden lg:flex">
             <a href="#">About</a>
           </li>
-          <li>
+          <li className="hidden lg:flex">
             <a href="#">Channels</a>
           </li>
         </ul>
@@ -32,24 +28,6 @@ const Nav = () => {
 
       {/* Search and Hamburger Icon */}
       <div className="flex gap-8">
-        <a href="#">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-            onClick={handleSearchClick}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-            />
-          </svg>
-        </a>
-
         <a
           href="#"
           id="bars-container"
@@ -127,34 +105,6 @@ const Nav = () => {
         </div>
       </div>
       {/* Search content */}
-
-      <div
-        className={`flex gap-6 absolute  left-0 w-full bg-black px-20 py-4 transition-transform transform origin-top-right z-[2] ${
-          isSearchOpen ? "" : "hidden"
-        }`}
-      >
-        <a href="#">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-            onClick={handleSearchClick}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-            />
-          </svg>
-        </a>
-        <input
-          type="text"
-          className="focus:outline-none focus:border-b  bg-transparent text-white"
-        />
-      </div>
     </nav>
   );
 };
