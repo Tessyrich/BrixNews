@@ -9,12 +9,11 @@ import { useState, useEffect } from "react";
 const Sectionmain = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [news, setNews] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
+
   const [searchNews, setSearchNews] = useState([]);
   const [page, setPage] = useState(1);
   const [isSearchLoading, setIsSearchLoading] = useState(true);
-
-  const [searchQuery, setSearchQuery] = useState(" ");
+  const [searchQuery, setSearchQuery] = useState("bitcoin");
   const [activeLiCategory, setActiveLiCategory] = useState(null);
   const [activeLiCountry, setActiveLiCountry] = useState(null);
 
@@ -47,8 +46,7 @@ const Sectionmain = () => {
   //   USE EFFECT FOR CONTROLLING OF API
 
   useEffect(() => {
-    const apiKey = "6ebc53abe0834d7181ab8e5494f825c3";
-    console.log("Search Query:", searchQuery);
+    const apiKey = "something";
 
     // Main news data
     const getTopHeadLines = async () => {
@@ -60,53 +58,48 @@ const Sectionmain = () => {
         apiKey,
       };
 
-      const response = await axios.get("https://newsapi.org/v2/top-headlines", {
-        params,
-      });
-
+      const response = await axios.get(
+        "https://mocki.io/v1/9b79a923-d9bb-4d1a-9d49-4a5dae0bdea4",
+        {
+          params,
+        }
+      );
+      console.log(country);
+      console.log(category);
       setNews(response.data.articles);
 
       setIsLoading(false);
     };
-
-    // CALL FUNCTIONS
-    getTopHeadLines();
 
     // FOR Searching a particular news
     const searchForArticles = async () => {
       if (searchQuery) {
         setIsSearchLoading(true);
         const params = {
-          q: searchQuery, // Use the actual search query here
+          q: searchQuery,
           pageSize: 25,
           apiKey,
         };
-
         try {
           const response = await axios.get(
-            "https://newsapi.org/v2/everything",
-            {
-              params,
-            }
+            "https://mocki.io/v1/9b79a923-d9bb-4d1a-9d49-4a5dae0bdea4"
+            // {
+            //   params,
+            // }
           );
           setSearchNews(response.data.articles);
         } catch (error) {
           console.error("Error fetching search results:", error);
+          setSearchNews([]); // Set an empty array in case of an error
         } finally {
           setIsSearchLoading(false);
         }
       }
     };
-    console.log(searchForArticles);
-    console.log(isSearching);
-    console.log(searchNews);
-    // Only call searchForArticles if isSearching is true and there is a valid searchQuery
-    if (isSearching && searchQuery) {
-      searchForArticles();
-    }
 
-    // Save search state to local storage
-    localStorage.setItem("isSearching", isSearching.toString());
+    // CALL FUNCTIONS
+    getTopHeadLines();
+    searchForArticles();
 
     // save to localstorage
     localStorage.setItem("selectedCategory", category);
@@ -116,7 +109,7 @@ const Sectionmain = () => {
     const body = document.querySelector("body");
     isDarkMode ? body.classList.add("dark") : body.classList.remove("dark");
     localStorage.setItem("darkMode", isDarkMode.toString());
-  }, [category, country, searchQuery, page, isDarkMode, isSearching]);
+  }, [category, country, searchQuery, page, isDarkMode]);
 
   // Function for country change
   const handleCountryChange = (e) => {
@@ -131,11 +124,11 @@ const Sectionmain = () => {
 
   //   FUNCTION FOR SEARCH
 
-  const handleSearchSubmit = (event) => {
-    if (event) {
-      event.preventDefault();
-    }
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setPage(1);
   };
+
   //   Function For Page Change
   const handlePageChange = (pageNumber) => {
     setPage(pageNumber);
@@ -143,10 +136,7 @@ const Sectionmain = () => {
 
   return (
     <div className="relative  w-full">
-      <Nav
-        handleSearchSubmit={handleSearchSubmit}
-        setSearchQuery={setSearchQuery}
-      />
+      <Nav />
       <div
         className=" bg-cover bg-center h-[20rem]"
         style={{
@@ -306,48 +296,12 @@ const Sectionmain = () => {
 
       <div className="w-full flex">
         <div className="w-full grid grid-col">
-          {isLoading || (isSearching && isSearchLoading) ? (
+          {isLoading ? (
             <div className="flex justify-center items-center h-screen">
               <InfinitySpin color="#dc2626" width={100} />
             </div>
-          ) : // Your news.map logic here
-          isSearching ? (
-            searchNews.map((article, index) => (
-              <div key={index} className="w-full px-10 py-6">
-                <div
-                  className="rounded-b-3xl h-lvh w-full overflow-hidden hover:transition-all dark:hover:transition-all shadow-lg"
-                  style={{ height: "600px" }}
-                >
-                  <img
-                    className="w-full h-2/3 "
-                    src={article.urlToImage ? article.urlToImage : Bgimage}
-                    alt={article.title}
-                    onError={(e) => {
-                      e.target.src = Bgimage;
-                    }}
-                  />
-
-                  <div className="px-6 py-4 ">
-                    <div className="font-bold text-xl">{article.title}</div>
-                    <p className="">{article.description}</p>
-                  </div>
-                  <div className="flex items-baseline justify-between px-6">
-                    <div className="text-red-600 bg-red-100 dark:text-red-300 dark:bg-red-900 px-3 py-1">
-                      {article.source.name}
-                    </div>
-                    <a
-                      href={article.url}
-                      target="_blank"
-                      rel="noopener noreferror"
-                      className="font-bold text-white bg-rose-500 hover:bg-rose-600 hover:transition-all px-4 py-2"
-                    >
-                      Read More
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))
           ) : (
+            // Your news.map logic here
             news.map((article, index) => (
               <div key={index} className="w-full px-10 py-6">
                 <div
@@ -384,6 +338,55 @@ const Sectionmain = () => {
               </div>
             ))
           )}
+        </div>
+        <div className="w-1/3 px-3">
+          <div className="">
+            <form onSubmit={handleSearchSubmit} className="">
+              <div className="w-full border dark:border-gray-700 dark:bg-gray-800 flex justify-between p-2 items-center rounded-xl ">
+                <input
+                  type="text"
+                  className=" h-full
+                  
+                  
+                  dark:bg-gray-800 focus:outline-none rounded-xl text-red-600"
+                  value={searchQuery}
+                  placeholder="Search News article..."
+                  onClick={(e) => setSearchQuery(e.target.value)}
+                />
+                {/* <button>search</button> */}
+              </div>
+            </form>
+            {isSearchLoading ? (
+              <div className="flex justify-center items-center h-screen">
+                <InfinitySpin color="#dc2626" width={100} />
+              </div>
+            ) : (
+              <>
+                <ul>
+                  {searchNews.map((article, index) => (
+                    <div
+                      key={index}
+                      className="rounded-b-3xl w-full  hover:transition-all dark:hover:transition-all shadow-lg"
+                    >
+                      <img
+                        className="w-full h-36 object-cover rounded-t-lg"
+                        src={article.urlToImage ? article.urlToImage : Bgimage}
+                        alt={article.title}
+                        onError={(e) => {
+                          e.target.src = Bgimage;
+                        }}
+                      />
+                      <ul>
+                        <li className="p-2 m-2" key={article.title}>
+                          <a href={article.url}>{article.title}</a>
+                        </li>
+                      </ul>
+                    </div>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
