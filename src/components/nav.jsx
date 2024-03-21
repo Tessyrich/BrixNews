@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -18,10 +19,11 @@ const Nav = () => {
         </a>
         <ul className="flex gap-8 ml-10">
           <li className="hidden lg:flex">
-            <a href="#">About</a>
+            {/* <a href="#">About</a> */}
+            <Link to={"/brixnews/about"}>About</Link>
           </li>
           <li className="hidden lg:flex">
-            <a href="#">Channels</a>
+            <Link to={"/brixnews/channel"}>Channels</Link>
           </li>
         </ul>
       </div>
@@ -59,11 +61,11 @@ const Nav = () => {
         }`}
       >
         <div className="mx-auto py-8 ">
-          <div className="flex flex-col py-4 overflow-hidden   text-3xl text-gray-400 whitespace-nowrap">
+          <div className="flex flex-col py-4 overflow-hidden  text-xl text-gray-400 whitespace-nowrap">
             <a
               href="#"
               id="bars-container "
-              className={`flex flex-col gap-2  justify-center `}
+              className={`flex flex-col gap-2  justify-center py-6`}
               onClick={handleHamburgerClick}
             >
               <span
@@ -83,24 +85,26 @@ const Nav = () => {
               ></span>
             </a>
             {/* Add more links as needed */}
-            <a href="#" className="active active:text-white font-bold">
-              About
-            </a>
-            <a href="#" className="active active:text-white font-bold">
-              Submit A Story
-            </a>{" "}
-            <a href="#" className="active active:text-white font-bold">
-              Contact
-            </a>{" "}
-            <a href="#" className="active active:text-white font-bold">
-              Terms of Use
-            </a>
-            <a href="#" className="active active:text-white font-bold">
-              cookies Policy
-            </a>{" "}
-            <a href="#" className="active active:text-white font-bold">
-              Terms and Condition
-            </a>
+            <div className="px-8 flex flex-col gap-5 pt-5 active active:text-white font-semibold">
+              <a href="#" className="">
+                About
+              </a>
+              <a href="#" className="">
+                Submit A Story
+              </a>{" "}
+              <a href="#" className="">
+                Contact
+              </a>{" "}
+              <a href="#" className="">
+                Terms of Use
+              </a>
+              <a href="#" className="">
+                cookies Policy
+              </a>{" "}
+              <a href="#" className="">
+                Terms and Condition
+              </a>
+            </div>
           </div>
         </div>
       </div>

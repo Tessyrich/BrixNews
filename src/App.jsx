@@ -1,9 +1,56 @@
-import { useState } from "react";
+// import { useState } from "react";
 
-import "./App.css";
-import Sectionmain from "./components/sectionmain";
+// import "./App.css";
+// import Sectionmain from "./components/sectionmain";
+// import Nav from "./components/nav";
 
-function App() {
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// function App() {
+//   const [selectedCountry, setSelectedCountry] = useState("us");
+//   const [selectedCategory, setSelectedCategory] = useState("general");
+
+//   const handleCountryChange = (newCountry) => {
+//     setSelectedCountry(newCountry);
+//   };
+
+//   const handleCategoryChange = (newCategory) => {
+//     setSelectedCategory(newCategory);
+//   };
+
+//   return (
+//     <>
+//       <Router>
+//         <div className=" dark:bg-gray-950 dark:text-white h-full">
+//           <Nav />
+//           <Routes>
+//             <Route
+//               exact
+//               path="/"
+//               element={
+//                 <Sectionmain
+//                   selectedCountry={selectedCountry}
+//                   selectedCategory={selectedCategory}
+//                 />
+//               }
+//             />
+//             {/* <Route path="/About" element={<About />} /> */}
+//           </Routes>
+//         </div>
+//       </Router>
+//     </>
+//   );
+// }
+
+// export default App;
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Mainlayout from "./layout/mainlayout";
+import Home from "./pages/Home";
+import About from "./pages/AboutUs/index";
+import Channel from "./pages/Channel/channel";
+
+const App = () => {
   const [selectedCountry, setSelectedCountry] = useState("us");
   const [selectedCategory, setSelectedCategory] = useState("general");
 
@@ -14,17 +61,16 @@ function App() {
   const handleCategoryChange = (newCategory) => {
     setSelectedCategory(newCategory);
   };
-
   return (
-    <>
-      <div className=" dark:bg-gray-950 dark:text-white h-full">
-        <Sectionmain
-          selectedCountry={selectedCountry}
-          selectedCategory={selectedCategory}
-        />
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Mainlayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/brixnews/about" element={<About />} />
+          <Route path="/brixnews/channel" element={<Channel />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
-}
-
+};
 export default App;

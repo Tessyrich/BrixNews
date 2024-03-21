@@ -1,13 +1,12 @@
-import React from "react";
+// import React from "react";
 import axios from "axios";
-import Nav from "./nav";
-import { InfinitySpin } from "react-loader-spinner";
-import Bgimage from "../assets/bgimage.jpg";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-// import SectionSub from "./SessionSub";
 
-const Sectionmain = () => {
+import { InfinitySpin } from "react-loader-spinner";
+import Bgimage from "../../assets/bgimage.jpg";
+// import Bgimage from "../assets/bgimage.jpg";
+import { useState, useEffect } from "react";
+
+const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [news, setNews] = useState([]);
 
@@ -409,4 +408,4 @@ const Sectionmain = () => {
   );
 };
 
-export default Sectionmain;
+export default Home;
