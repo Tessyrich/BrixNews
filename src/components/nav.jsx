@@ -14,9 +14,9 @@ const Nav = () => {
       {/* Logo and Navigation Links */}
       <div className="flex">
         <div className="w-8 py-2 border-4 border-red-500"></div>
-        <a href="#" className="font-semibold">
-          LUX <span className="font-thin">News</span>{" "}
-        </a>
+        <Link to={"/"}>
+          LUX <span className="font-thin">News</span>
+        </Link>
         <ul className="flex gap-8 ml-10">
           <li className="hidden lg:flex">
             {/* <a href="#">About</a> */}
@@ -86,24 +86,11 @@ const Nav = () => {
             </a>
             {/* Add more links as needed */}
             <div className="px-8 flex flex-col gap-5 pt-5 active active:text-white font-semibold">
-              <a href="#" className="">
-                About
-              </a>
-              <a href="#" className="">
-                Submit A Story
-              </a>{" "}
-              <a href="#" className="">
-                Contact
-              </a>{" "}
-              <a href="#" className="">
-                Terms of Use
-              </a>
-              <a href="#" className="">
-                cookies Policy
-              </a>{" "}
-              <a href="#" className="">
-                Terms and Condition
-              </a>
+              <Link to={"/brixnews/about"}>About</Link>
+              <Link to={"/"}>Submit a Story</Link> <Link to={"/"}>Contact</Link>{" "}
+              <Link to={"/"}>Terms Of Use</Link>{" "}
+              <Link to={"/"}>Cookies Policy</Link>{" "}
+              <Link to={"/"}>Terms and Condition</Link>{" "}
             </div>
           </div>
         </div>

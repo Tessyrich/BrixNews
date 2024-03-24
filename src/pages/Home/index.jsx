@@ -87,6 +87,7 @@ const Home = () => {
             //   params,
             // }
           );
+          console.log(data);
           setSearchNews(response.data.articles);
         } catch (error) {
           console.error("Error fetching search results:", error);

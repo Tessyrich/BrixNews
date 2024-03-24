@@ -45,6 +45,7 @@
 // export default App;
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Mainlayout from "./layout/mainlayout";
 import Home from "./pages/Home";
 import About from "./pages/AboutUs/index";
@@ -61,11 +62,20 @@ const App = () => {
   const handleCategoryChange = (newCategory) => {
     setSelectedCategory(newCategory);
   };
+
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Mainlayout />}>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                selectedCountry={selectedCountry}
+                selectedCategory={selectedCategory}
+              />
+            }
+          />
           <Route path="/brixnews/about" element={<About />} />
           <Route path="/brixnews/channel" element={<Channel />} />
         </Route>
