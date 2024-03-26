@@ -65,21 +65,23 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<Mainlayout />}>
-          <Route
-            path="/"
-            element={
-              <Home
-                selectedCountry={selectedCountry}
-                selectedCategory={selectedCategory}
-              />
-            }
-          />
-          <Route path="/brixnews/about" element={<About />} />
-          <Route path="/brixnews/channel" element={<Channel />} />
-        </Route>
-      </Routes>
+      <div className=" dark:bg-gray-950 dark:text-white h-full">
+        <Routes>
+          <Route element={<Mainlayout />}>
+            <Route
+              path="/"
+              element={
+                <Home
+                  selectedCountry={selectedCountry}
+                  selectedCategory={selectedCategory}
+                />
+              }
+            />
+            <Route path="/brixnews/about" element={<About />} />
+            <Route path="/brixnews/channel" element={<Channel />} />
+          </Route>
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 };

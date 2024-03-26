@@ -46,7 +46,7 @@ const Home = () => {
   //   USE EFFECT FOR CONTROLLING OF API
 
   useEffect(() => {
-    const apiKey = "something";
+    const apiKey = "6ebc53abe0834d7181ab8e5494f825c3";
 
     // Main news data
     const getTopHeadLines = async () => {
@@ -58,12 +58,9 @@ const Home = () => {
         apiKey,
       };
 
-      const response = await axios.get(
-        "https://mocki.io/v1/9b79a923-d9bb-4d1a-9d49-4a5dae0bdea4",
-        {
-          params,
-        }
-      );
+      const response = await axios.get("https://newsapi.org/v2/top-headlines", {
+        params,
+      });
       console.log(country);
       console.log(category);
       setNews(response.data.articles);
@@ -82,7 +79,7 @@ const Home = () => {
         };
         try {
           const response = await axios.get(
-            "https://mocki.io/v1/9b79a923-d9bb-4d1a-9d49-4a5dae0bdea4"
+            "https://newsapi.org/v2/everything"
             // {
             //   params,
             // }
