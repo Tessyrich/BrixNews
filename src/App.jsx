@@ -77,8 +77,8 @@ const App = () => {
                 />
               }
             />
-            <Route path="/brixnews/about" element={<About />} />
-            <Route path="/brixnews/channel" element={<Channel />} />
+            <Route path="/luxnews/about" element={<About />} />
+            <Route path="/luxnews/channel" element={<Channel />} />
           </Route>
         </Routes>
       </div>
